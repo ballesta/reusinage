@@ -36,11 +36,23 @@ portant sur le contenu d'un programme ou d'un dossier.
             - vers "dateDeNaissance" en "Camel Case" qui est apparue plus tard
               https://commons.wikimedia.org/wiki/File:CamelCase.svg#/media/Fichier:CamelCase.svg
               
-- Les outils basés sur l'analyse syntaxiques des langages
+- Les outils basés sur l'analyse syntaxiques des langages comme PHP PARSER que nous allons utiliser.
 
+    - PHP Parser 
+    
 # Analyse syntaxique de programmes PHP
 
+- L’analyse lexicale, est la conversion d’une chaîne de caractères (un texte) 
+en une liste de symboles (tokens en anglais). 
+- Elle fait partie de la première phase de la chaîne de compilation. 
+- Les symboles générés par l'analyseur lexical sont ensuite consommés lors de l'analyse syntaxique. 
+- Un analyseur lexical est généralement combiné à un analyseur syntaxique pour 
+analyser la syntaxe du texte basé sur la grammaire du langage.
+  
 ## Analyse lexicale
+
+Prenons un exemple
+
 
 ## Analyse syntaxique
 
@@ -57,6 +69,7 @@ portant sur le contenu d'un programme ou d'un dossier.
        Release:	20.10
        Codename:	groovy
     ````
+  
 - Vous devez disposer des logiciels suivants:
     - **Composer**
       ````
@@ -75,6 +88,13 @@ portant sur le contenu d'un programme ou d'un dossier.
           ````
     
 # Creation du projet
+
+Créer un dossier "reusinage_PHP" pour notre projet:
+
+````
+mkdir reusinage_PHP
+````
+
 
 # Installation de PHP PARSER
 
