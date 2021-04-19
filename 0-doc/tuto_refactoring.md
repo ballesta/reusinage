@@ -42,6 +42,8 @@ portant sur le contenu d'un programme ou d'un dossier.
     
 # Analyse syntaxique de programmes PHP
 
+![Analyse lexicale et Syntaxique](Analyse_syntaxique.png)
+
 - L’analyse lexicale, est la conversion d’une chaîne de caractères (un texte) 
 en une liste de symboles (tokens en anglais). 
 - Elle fait partie de la première phase de la chaîne de compilation. 
