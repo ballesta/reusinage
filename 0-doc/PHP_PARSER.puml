@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+#palegreen:$age_du_capitaine = 72; <
+:PHP Parser
+Analyse lexicale et Syntaxique;
+
+#palegreen: Instruction_assignation(Identifiant: 'age_du_capitaine', Entier:72) <
+
+:Visiteur
+Parcourt l'Arbre syntaxique;
+:Identifiant
+Transformation du nom
+de 'age_du_capitaine' (Snake Case)
+en 'ageDuCapitaine'   (Camel Case);
+
+#palegreen: Instruction_assignation(Identifiant: 'ageDuCapitaine', Entier:72) <
+
+:Regénération du source
+à partir de l'arbre syntaxique ;
+
+#palegreen:$ageDuCapitaine = 72; <
+stop
+
+@enduml
