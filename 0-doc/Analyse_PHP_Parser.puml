@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+
+#palegreen:$age_du_capitaine = 72; #magenta   <
+:Analyse Lexicale;
+#palegreen:[Identifiant:'age_du_capitaine'] ['='] [Entier:72] [';'] <
+:Analyse syntaxique;
+#palegreen:Instruction_assignation(Identifiant:'age_du_capitaine',Entier:72) <
+
+stop
+
+@enduml
