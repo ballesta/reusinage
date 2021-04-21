@@ -15,14 +15,20 @@ function tests(string $titre)
 }
 
 // Vérifie que la transformation donne le résultat attendu
-function verifie(string $id_snake,string $id_camel_OK)
+
+function verifie(string $id_snake,      // Identifiant à transformer
+                 string $id_camel_OK)   // Identifiant attendu après transformation
 {
+    // Transformation
     $id_camel = snake_to_camel_case($id_snake);
 
     echo "    $id_snake";
+    // Pour la présentation en colonnes
     $espaces = 20 - strlen($id_snake);
     for ($i=0; $i<$espaces; $i++) echo ' ';
+    // Identifiant attendu
     echo " => $id_camel_OK ";
+    // Voir si la transformation correspond au résultat attendu
     if ($id_camel === $id_camel_OK)
         echo "OK";
     else
