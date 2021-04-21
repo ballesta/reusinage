@@ -13,8 +13,9 @@ function Test()
 
     // Lis le code source à traiter
     $code = file_get_contents("programme.php");
+    echo "Source à réusiner:\n $code \n";
     // Analyse syntaxique du code
-    $arbre_syntaxique = parse_to_AST($code);
+
     affiche_source("Etat initial", $arbre_syntaxique);
 
 }
