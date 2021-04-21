@@ -1,33 +1,69 @@
 <?php
 
+tests('Transforme un identifiant du format snake_case en camelCase');
+
+// Tests (en premier, le plus important
+function tests(string $titre)
+{
+    echo "Test: $titre\n";
+    verifie('age_du_capitaine', 'ageDuCapitaine');
+    verifie('age_de_la_capitaine', 'ageDeLaCapitaine');
+    verifie('_age_', 'Age');
+    verifie('AGE', 'age');
+    verifie('A__g__e', 'aGE');
+    echo "Fin du Test\n";
+}
+
+// Vérifie que la transformation donne le résultat attendu
+function verifie(string $id_snake,string $id_camel_OK)
+{
+    $id_camel = snake_to_camel_case($id_snake);
+
+    echo "    $id_snake";
+    $espaces = 20 - strlen($id_snake);
+    for ($i=0; $i<$espaces; $i++) echo ' ';
+    echo " => $id_camel_OK ";
+    if ($id_camel === $id_camel_OK)
+        echo "OK";
+    else
+        echo " ==> $id_camel ***Erreur***";
+    echo "\n";
+}
+
 // Transforme un identifiant du format snake_case en camelCase
 function snake_to_camel_case(String $id_snake) : String
 {
-    // Transforme en minuscules
+    // Transforme l'identifiant en minuscules
     $id_snake = strtolower($id_snake);
+    // Transforme l'identifiant en un tableau de caracteres
+    $id_snake_array = str_split($id_snake);
     // Résultat de la transformation
-    $id_camel = '';
-    $iMax = strlen($id_snake);
-    for ($i = 0; $i < $iMax; $i++){
-        $c = $id_snake[$i];
-        echo $c,'-';
-        if ($c != '_')
+    $id_camel_array = [];
+    $forcer_Majuscule = false;
+    foreach ($id_snake_array as $c){
+        if ($c !== '_')
         {
-            $id_camel .= $c;
+            // Caractère autre que sous-ligné
+            if ($forcer_Majuscule)
+            {
+                // Forcer en Majuscule
+                $id_camel_array[] = ucfirst($c);
+                $forcer_Majuscule = false;
+            }
+            else
+            {
+                // Garder en minuscule
+                $id_camel_array[] = $c;
+            }
         }
         else
         {
-            // '_'
-            // Prochain caractère
-            $i++;
-            $c = $id_snake[$i];
-            // En majuscules
-            $id_camel .= ucfirst($c);
+            // Caractère '_'
+            // Forcer le prochain caractère en majuscules
+            $forcer_Majuscule = true;
+            // Ne pas retranscrire le caractère sousligné
         }
     }
-    die();
+    $id_camel = implode("", $id_camel_array);
     return $id_camel;
 }
-
-    $v = '_age_du_capitaine';
-    echo $v, ' => ', snake_to_camel_case('age_du_capitaine'), "\n";
