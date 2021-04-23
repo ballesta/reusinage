@@ -3,7 +3,7 @@
 # Objectifs, présentation
 
 Définition de Wikipédia l'encyclopédie libre:
-- https://fr.wikipedia.org/wiki/Réusinage_de_code
+- [Réusinage](https://fr.wikipedia.org/wiki/Réusinage_de_code)
 
 Le **réusinage** de code est l'opération consistant à:
 - retravailler (restructurer) le code source d'un programme informatique, 
@@ -28,13 +28,14 @@ portant sur le contenu d'un programme ou d'un dossier.
       
 - Environnements de déveveloppements
     - Les IDE comme PHPStorm de JetBrain ou VS code de Microsoft proposent des stragegies de remplacement 
-    plus sophistiquée en supportant les expressions régulières et en distingant le code source et les commentaires
+    plus sophistiquée que les éditeurs de textes orienté caratères en supportant les expressions régulières 
+    et en distingant le code source et les commentaires
       
     - Ces outils quoi que très puissant et utiles ont leur limites
         - Par exemple, changer les noms des variables d'un programme de conventions d'écriture 
             - de "Snake case" ("date_de_naissance") qui était la pratique dominante dans les années 1980 
             - vers "dateDeNaissance" en "Camel Case" qui est apparue plus tard
-              https://commons.wikimedia.org/wiki/File:CamelCase.svg#/media/Fichier:CamelCase.svg
+              [camelCase](https://commons.wikimedia.org/wiki/File:CamelCase.svg#/media/Fichier:CamelCase.svg)
               
 - Les outils basés sur l'analyse syntaxiques des langages comme PHP PARSER que nous allons utiliser.
 
@@ -46,7 +47,7 @@ portant sur le contenu d'un programme ou d'un dossier.
 
 - L’analyse lexicale, est la conversion d’une chaîne de caractères (un texte) 
 en une liste de symboles (tokens en anglais). 
-- Elle fait partie de la première phase de la chaîne de compilation. 
+- Elle constitue la première phase de la plus part des compilateurs. 
 - Les symboles générés par l'analyseur lexical sont ensuite consommés lors de l'analyse syntaxique. 
 - Un analyseur lexical est généralement combiné à un analyseur syntaxique pour 
 analyser la syntaxe du texte basé sur la grammaire du langage.
@@ -66,6 +67,7 @@ Prenons un exemple
 
     ````
        lsb_release -a
+  
        Distributor ID:	Ubuntu
        Description:	Ubuntu 20.10
        Release:	20.10

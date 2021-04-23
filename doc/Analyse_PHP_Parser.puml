@@ -3,7 +3,7 @@
 
 start
 
-#palegreen:$age_du_capitaine = 72; #magenta   <
+#palegreen:$age_du_capitaine = 72;    <
 :Analyse Lexicale;
 #palegreen:[Identifiant:'age_du_capitaine'] ['='] [Entier:72] [';'] <
 :Analyse syntaxique;
