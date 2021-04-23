@@ -1,8 +1,9 @@
 <?php
 
-traitement();
+$Age_estimé_du_capitaine = estimation_age();
+echo "Age_estimé_du_capitaine: $Age_estimé_du_capitaine ans\n";
 
-function traitement() : int
+function estimation_age() : int
 {
     $age_du_capitaine = null;
     $longueur_bateau = 310;
