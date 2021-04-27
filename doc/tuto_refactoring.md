@@ -1,8 +1,13 @@
-# Tutoriel sur le réusinage de programmes en PHP
+## Tutoriel 
+sur le réusinage de programmes 
+en PHP
+
+Auteur: Bernard BALLESTA
+eMail: bernard@ballesta.fr
 
 # Objectifs, présentation
 
-Définition de Wikipédia l'encyclopédie libre:
+Définition du processus de réusinage par Wikipédia l'encyclopédie libre:
 - [Réusinage](https://fr.wikipedia.org/wiki/Réusinage_de_code)
 
 Le **réusinage** de code est l'opération consistant à:
@@ -10,11 +15,15 @@ Le **réusinage** de code est l'opération consistant à:
 - sans y ajouter de nouvelles fonctionnalités,
 - sans en corriger les bogues.
 
+
 Le terme **réusinage** est originaire du Québec
 Le terme anglais est "**refactoring**"
 
 L'objectif de ce tutoriel est de présenter l'utilisation de l'outil "**PHP PARSER**" 
-pour faire du réusinage de code.
+pour faire du réusinage de code en PHP.
+
+Le code source à réusiner est écrite en PHP.
+L'outil "**PHP PARSER**" utilisé pour modifier le code est lui aussi écrit en PHP
 
 # Types d'outils de réusinage
 
@@ -28,8 +37,10 @@ portant sur le contenu d'un programme ou d'un dossier.
       
 - Environnements de déveveloppements
     - Les IDE comme PHPStorm de JetBrain ou VS code de Microsoft proposent des stragegies de remplacement 
-    plus sophistiquée que les éditeurs de textes orienté caratères en supportant les expressions régulières 
-    et en distingant le code source et les commentaires
+    plus sophistiquée que les éditeurs de textes orienté caratères en 
+        - supportant les expressions régulières 
+        - distingant le code source et les commentaires
+        - ayant la connaissance de la syntaxe du langage de programmation
       
     - Ces outils quoi que très puissant et utiles ont leur limites
         - Par exemple, changer les noms des variables d'un programme de conventions d'écriture 
@@ -37,33 +48,70 @@ portant sur le contenu d'un programme ou d'un dossier.
             - vers "dateDeNaissance" en "Camel Case" qui est apparue plus tard
               [camelCase](https://commons.wikimedia.org/wiki/File:CamelCase.svg#/media/Fichier:CamelCase.svg)
               
-- Les outils basés sur l'analyse syntaxiques des langages comme PHP PARSER que nous allons utiliser.
-
-    - PHP Parser 
-    
-# Analyse syntaxique de programmes PHP
+- Les outils basés sur l'analyse syntaxiques des langages comme "**PHP PARSER**" que nous allons utiliser.
+ 
+# Analyse syntaxique de programmes PHP par "**PHP PARSER**" 
 
 ![Analyse lexicale et Syntaxique](Analyse_syntaxique.png)
 
-- L’analyse lexicale, est la conversion d’une chaîne de caractères (un texte) 
-en une liste de symboles (tokens en anglais). 
-- Elle constitue la première phase de la plus part des compilateurs. 
-- Les symboles générés par l'analyseur lexical sont ensuite consommés lors de l'analyse syntaxique. 
-- Un analyseur lexical est généralement combiné à un analyseur syntaxique pour 
-analyser la syntaxe du texte basé sur la grammaire du langage.
-  
 ## Analyse lexicale
-
-Prenons un exemple
-
+- L’analyse lexicale, est la conversion d’une chaîne de caractères (un texte) 
+en une liste de symboles ("tokens" en anglais). 
+- Elle constitue la première phase de la plupart des compilateurs. 
 
 ## Analyse syntaxique
+- Un analyseur lexical est généralement combiné à un analyseur syntaxique pour
+  analyser la syntaxe du texte basé sur la grammaire du langage.
+- Les symboles générés par l'analyseur lexical sont ensuite traités par l'analyse syntaxique. 
+  
+## Arbre syntaxique
 
-### Arbre syntaxique
+L`arbre syntaxique du programme est: 
+- le résultat de l'analyse syntaxique
+- sous forme d'une structure de données adaptés aux modifications et 
+  ajouts à faire par le processus de réusinage
 
-# Vérifications avant installation
+### Visualisation d'arbres syntaxiques
 
-- Ce tutoriel est réalisé sur le système d'exploitation Ubuntu version 20:
+Nous utiliserons l[RSyntaxTree](https://yohasebe.com/rsyntaxtree/)
+
+Outil permettant de générer la visualisation d'un arbre syntaxique à partir d'une version textuelle.
+
+Utilisé dans ce tutoriel à des fins pédagogiques seulement.
+
+Exemple de fragment de programme comportant deux assignations:
+
+````
+    $pi = 3.14;
+    
+    $révolution-Française = 1798;
+````
+
+Texte de l'**arbre syntaxique** utilisé par
+[RSyntaxTree](https://yohasebe.com/rsyntaxtree/) pour afficher l'arbre syntaxique sous forme graphique:
+
+````
+[PROGRAMME
+    [ASSIGNATION
+        [VARIABLE PI]
+        [NOMBRE-FLOTTANT 3.14]
+    ]
+    [ASSIGNATION
+        [VARIABLE révolution-Française]
+        [NOMBRE-ENTIER 1789]
+    ]
+]
+````
+Diagramme généré par le logiciel "**rsyntaxtree**":
+
+![Arbre syntaxique de deux assinations](AS_Assignations.png)
+
+
+
+
+# Vérifications de la configuration avant installation
+
+- Ce tutoriel est réalisé sur le système d'exploitation **Ubuntu version 20.04**:
 
     ````
        lsb_release -a
@@ -93,7 +141,7 @@ Prenons un exemple
     
 # Creation du projet
 
-Créer un dossier "reusinage_PHP" pour notre projet:
+Créer un dossier "reusinage_PHP" par exemple pour notre projet:
 
 ````
 mkdir reusinage_PHP
@@ -102,36 +150,8 @@ mkdir reusinage_PHP
 
 # Installation de PHP PARSER
 
-# Logiciels utilisés
 
-## Visualisation d'arbres syntaxiques
 
-[RSyntaxTree](https://yohasebe.com/rsyntaxtree/)
 
-Outil permettant de générer la visualisation d'un arbre syntaxique à partir d'une version textuelle.
+# Exemple de réusinage réalisé par la suite de ce tutoriel
 
-Fragment de programme comportant deux assignations:
-
-````
-    $pi = 3.14;
-    
-    $révolution-Française = 1798;
-````
-
-Texte de l'**arbre syntaxique**:
-
-````
-[PROGRAMME
-    [ASSIGNATION
-        [VARIABLE PI]
-        [NOMBRE-FLOTTANT 3.14]
-    ]
-    [ASSIGNATION
-        [VARIABLE révolution-Française]
-        [NOMBRE-ENTIER 1789]
-    ]
-]
-````
-Diagramme généré par le logiciel "**rsyntaxtree**":
-
-![Arbre syntaxique de deux assinations](AS_Assignations.png)
