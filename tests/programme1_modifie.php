@@ -1,7 +1,7 @@
 <?php
 
-$ageEstiméDuCapitaine = estimationAge();
-echo "Age_estimé_du_capitaine: {$ageEstiméDuCapitaine} ans\n";
+$ageEstimeDuCapitaine = estimationAge();
+echo "Age estimé du capitaine: {$ageEstimeDuCapitaine} ans\n";
 function estimationAge() : int
 {
     $ageDuCapitaine = null;
@@ -13,6 +13,6 @@ function estimationAge() : int
     }
     $poidsDuCapitaine = 100;
     $pi = 3.14;
-    $terminé = true;
+    $termine = true;
     return $ageDuCapitaine;
 }

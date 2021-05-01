@@ -3,34 +3,54 @@ use PhpParser\Node;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
 
+
+
+// Exemple de réusinage à reprendre pour tout nouvel usinage.
+// Seule partie à écrire, le reste est factorisé et donc commun à tout les usinages.
+
+// Change le nom des identificateurs
 class Reusine_nom_identificateurs extends NodeVisitorAbstract
 {
+    use Trace;
+
     // Exécuté à l'entrée de chaque noeud de l'arbre syntaxique
-    public function enterNode(Node $node)
+    // Ce visiteur est appelé par l'accompagnateur qui organise la visite
+    // Appellé pour chawque noeud de l'arbre syntaxique
+    public function enterNode
+    (
+        // Entrée dans le noeud
+        Node $node
+    )
     {
         // Traitement selon le type du noeud
+        // Un seul traitement réalisé avec retour immédiat
 
         // Variable ?
-        if ($node instanceof Node\Expr\Variable) {
+        if ($node instanceof Node\Expr\Variable)
+        {
             // Visite d'une variable
-            echo ">>>>Visite Identificateur $node->name \n";
+            Trace::affiche( "Visite Identificateur", $node->name);
             // Transforme le nom de la variable en "camelCase"
             $node->name = $this->snake_to_camel_case($node->name);
         }
 
-        // Appel de fonction
-        if ($node instanceof Node\Expr\FuncCall) {
+        // Appel de fonction ?
+        elseif  ($node instanceof Node\Expr\FuncCall)
+        {
             // Visite d'un appel de fonction
-            echo ">>>>Visite d'un appel de fonction $node->name \n";
+            Trace::affiche( "Visite d'un appel de fonction", $node->name);
             $node->name->parts[0] = $this->snake_to_camel_case($node->name);
         }
 
-        // Définition de fonction
-        if ($node instanceof Node\Stmt\Function_) {
+        // Définition de fonction ?
+        elseif ($node instanceof Node\Stmt\Function_)
+        {
             // Visite d'un appel de fonction
-            echo ">>>>Visite d'un appel de fonction $node->name \n";
+            Trace::affiche( "Visite d'une définition de fonction", $node->name);
+
             $node->name->name = $this->snake_to_camel_case($node->name);
         }
+        // Autre noeud: ignorer (ne rien faire)
     }
 
     // Transforme un identifiant du format "snake_case" en "camelCase"
@@ -40,7 +60,7 @@ class Reusine_nom_identificateurs extends NodeVisitorAbstract
         String $id_snake
     )
     :
-        // Identifiant en snakeCase renvoyé
+        // Identifiant en camelCase renvoyé
         String
     {
         // Transforme l'identifiant en lettres minuscules
@@ -61,6 +81,7 @@ class Reusine_nom_identificateurs extends NodeVisitorAbstract
                 {
                     // Forcer en Majuscule
                     $id_camel_array[] = ucfirst($c);
+                    // Pour le prochain caractère
                     $forcer_Majuscule = false;
                 }
                 else
@@ -76,10 +97,11 @@ class Reusine_nom_identificateurs extends NodeVisitorAbstract
                 // Caractère '_'
                 // Forcer le prochain caractère en majuscules
                 $forcer_Majuscule = true;
-                // Ne pas retranscrire (ignorer) le caractère souligné
+                // Ne pas retranscrire (ignorer) ce caractère souligné
             }
         }
         $id_camel = implode("", $id_camel_array);
+        // Renvoie l'identifiant transformé en camelCase
         return $id_camel;
     }
 }

@@ -22,10 +22,12 @@ function Test()
 {
     // Programme Source à réusiner
     $reusinage = new Reusinage
-                 ("programme1",
-                  new Reusine_nom_identificateurs()
+                 (
+                     // Programme à réusiner
+                     "programme1",
+                     // Modifications à réaliser dans le programme
+                     new Reusine_nom_identificateurs()
                  );
-    $reusinage->reusine_source();
 }
 
 
