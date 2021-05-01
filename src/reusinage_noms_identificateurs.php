@@ -15,16 +15,15 @@
 // Charges les composants utilisés (principalement "php parser")
 require "../vendor/autoload.php";
 
+require "Reusinage.php";
+
 Test();
 
 function Test()
 {
     // Programme Source à réusiner
     $reusinage = new Reusinage("programme1");
-    $reusinage->reusine();
-
-
-
+    $reusinage->reusine_source();
 }
 
 
