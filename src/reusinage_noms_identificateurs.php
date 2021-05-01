@@ -17,25 +17,28 @@ use PhpParser\ParserFactory;
 use PhpParser\PrettyPrinter;
 
 // Ce dont a besoin le visiteur pour transformer le programme
+// au cours du parcours de l'arbre syntaxique.
 use PhpParser\Node;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
 
+// Charges les composants utilisés (principalement "php parser")
 require "../vendor/autoload.php";
 
 Test();
 
 function Test()
 {
-    $programme = "programme.php";
-    $programme_modifié = "programme_modifié.php";
+    // Programme Source à réusiner
+    $programme = "../tests/programme1.php";
+    $programme_modifié = "../tests/programme1_modifié.php";
     echo "Tansforme $programme en $programme_modifié\n";
     // Lis le code source à traiter
     $code = file_get_contents($programme);
     echo "Source à réusiner:\n $code \n";
     // Analyse syntaxique du code donnat l'arbre syntaxique
     $arbre_syntaxique = analyse_syntaxe($code);
-    affiche_arbre_syntaxique("Programme.php", $arbre_syntaxique);
+    affiche_arbre_syntaxique("Programme1.php", $arbre_syntaxique);
 
     // Réusinage du code
     $arbre_syntaxique_reusine = reusine($arbre_syntaxique);
@@ -59,7 +62,8 @@ function analyse_syntaxe($code) : array
     }
     return $arbre_syntaxique;
 }
-
+// Réusine un arbre syntaxique
+// Renvoie l'arbre modifié
 function reusine($arbre_syntaxique) : array
 {
 
@@ -99,24 +103,25 @@ function reusine($arbre_syntaxique) : array
 }
 
 
-// Transforme un identifiant du format snake_case en camelCase
+// Transforme un identifiant du format "snake_case" en "camelCase"
 function snake_to_camel_case(String $id_snake) : String
 {
-    // Transforme l'identifiant en minuscules
+    // Transforme l'identifiant en lettres minuscules
     $id_snake = strtolower($id_snake);
     // Transforme l'identifiant en un tableau de caracteres
     $id_snake_array = str_split($id_snake);
     // Résultat de la transformation
     $id_camel_array = [];
+    // Forcer le prochain caratère en Majuscule
     $forcer_Majuscule = false;
     $premier_caractere = true;
+    // Pour tous les caractères de l'identifiant
     foreach ($id_snake_array as $c){
         if ($c !== '_')
         {
             // Caractère autre que sous-ligné
             if (!$premier_caractere && $forcer_Majuscule )
             {
-
                 // Forcer en Majuscule
                 $id_camel_array[] = ucfirst($c);
                 $forcer_Majuscule = false;
@@ -158,15 +163,12 @@ function affiche_arbre_syntaxique($titre, $arbre_syntaxique)
 function affiche_source($titre, $arbre_syntaxique)
 {
     echo "---- Source: $titre ----\n";
-
     // Crée un générateur de source à partir d'un arbre syntaxique
     $prettyPrinter = new PrettyPrinter\Standard();
     // Regénère le source à partir de l`arbre syntaxique
     $source_modifié = $prettyPrinter->prettyPrintFile($arbre_syntaxique);
     // Ecris le source généré
-    file_put_contents("programme_modifié.php",$source_modifié);
-    echo "programme_modifié.php \n",
+    file_put_contents("../tests/programme1_modifié.php",$source_modifié);
+    echo "programme1_modifié.php \n",
          $source_modifié, "\n\n";
 }
-
-
