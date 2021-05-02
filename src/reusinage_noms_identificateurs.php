@@ -10,19 +10,21 @@
 //     - la maintenance
 //     - et l`évolution.
 
-
-
 // Charges les composants utilisés (principalement "php parser")
 require "../vendor/autoload.php";
 
 require "Reusinage.php";
+require "Reusine_nom_identificateurs.php";
 
 Test();
 
 function Test()
 {
     // Programme Source à réusiner
-    $reusinage = new Reusinage("programme1");
+    $reusinage = new Reusinage
+                 ("programme1",
+                  new Reusine_nom_identificateurs()
+                 );
     $reusinage->reusine_source();
 }
 

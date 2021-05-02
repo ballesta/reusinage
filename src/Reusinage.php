@@ -50,29 +50,40 @@ class Reusinage
         return $arbre_syntaxique;
     }
 
-    private function reusine_arbre_syntaxique(array $arbre_syntaxique,
-                                              NodeVisitorAbstract $visiteur )
+    private function reusine_arbre_syntaxique
+    (
+        // Arbre syntaxique à réusiner
+        array $arbre_syntaxique,
+        // Visiteur responsable des modifications
+        NodeVisitorAbstract $visiteur
+    )
     {
-        // Crée un accompagnateur pour la visite de l'arbre syntaxique
+        // Crée un accompagnateur (traverseur)
+        // pour la visite (le parcours) de l'arbre syntaxique
         $accompagnateur = new NodeTraverser();
         // Crée un visiteur pour tous les noeuds de l'arbre syntaxique
-
+        $accompagnateur->addVisitor($visiteur);
+        // Traverse l'arbre syntaxique et fait les modifications
         return $accompagnateur->traverse($arbre_syntaxique);
     }
 
-    private function affiche_arbre_syntaxique(string $titre, 
-                                              array $arbre_syntaxique)
+    private function affiche_arbre_syntaxique
+    (
+        // Titre de l'affichage
+        string $titre,
+        // Arbre syntaxique à afficher
+        array $arbre_syntaxique
+    )
     {
-
         echo "****  Arbre Syntaxique ", $titre, " ****", "\n";
-        // Create AST Dumper
+        // Crée l'afficheur d'arbre syntaxique
         $afficheur_AS = new NodeDumper;
         // Affiche AS
         echo $afficheur_AS->dump($arbre_syntaxique), "\n\n";
         return;
     }
 
-    // Affiche le source du programme à partir de l`arbre syntaxique
+    // Affiche pûis sauvegarde le source du programme à partir de l`arbre syntaxique
     private function affiche_source($titre, $arbre_syntaxique)
     {
         echo "---- Source: $titre ----\n";
@@ -82,6 +93,8 @@ class Reusinage
         $source_modifie = $prettyPrinter->prettyPrintFile($arbre_syntaxique);
         // Ecris le source généré
         file_put_contents($this->programme_modifie,$source_modifie);
-        echo "programme1_modifié.php \n", $source_modifie, "\n\n";
+        echo "{$this->programme_modifie}.php \n",
+             $source_modifie,
+             "\n\n";
     }
 }

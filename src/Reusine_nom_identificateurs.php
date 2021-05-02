@@ -1,4 +1,7 @@
 <?php
+use PhpParser\Node;
+use PhpParser\NodeTraverser;
+use PhpParser\NodeVisitorAbstract;
 
 class Reusine_nom_identificateurs extends NodeVisitorAbstract
 {
@@ -31,7 +34,14 @@ class Reusine_nom_identificateurs extends NodeVisitorAbstract
     }
 
     // Transforme un identifiant du format "snake_case" en "camelCase"
-    function snake_to_camel_case(String $id_snake) : String
+    function snake_to_camel_case
+    (
+        // Identifiant en snakeCase à transformer
+        String $id_snake
+    )
+    :
+        // Identifiant en snakeCase renvoyé
+        String
     {
         // Transforme l'identifiant en lettres minuscules
         $id_snake = strtolower($id_snake);
