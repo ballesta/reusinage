@@ -27,11 +27,3 @@ function Test()
 }
 
 
-
-// Affiche un Arbre Syntaxique
-function affiche_arbre_syntaxique($titre, $arbre_syntaxique)
-{
-
-}
-
-
