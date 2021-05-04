@@ -32,9 +32,10 @@ class Reusinage
         $this->nom_fichier_programme_modifie = "../tests/{$nom_fichier_programme}_modifie.php";
 
         // C'est parti!
-        echo "Transforme $this->nom_fichier_programme"
-            ."en"
-            .$this->nom_fichier_programme_modifie ." \n";
+        echo  "Transforme $this->nom_fichier_programme"
+             , "en"
+             , $this->nom_fichier_programme_modifie
+             , "\n";
 
         // Lis le code source à traiter
         $code = file_get_contents( $this->nom_fichier_programme );
@@ -98,7 +99,7 @@ class Reusinage
         return $accompagnateur->traverse($arbre_syntaxique);
     }
 
-    // Affiche un arbre syntaxique en utilisant le "NodeDumper" de "PHP Parser"
+    // Affiche un arbre syntaxique en utilisant le "NodeDumper" de "PHP Parser".
     private function affiche_arbre_syntaxique
     (
         // Titre de l'affichage
@@ -114,7 +115,8 @@ class Reusinage
                       $afficheur_AS->dump($arbre_syntaxique));
     }
 
-    // Affiche pûis sauvegarde le source du programme à partir de l`arbre syntaxique
+    // Affiche puis sauvegarde le source du programme à partir de l`arbre syntaxique
+    // modifié par le réusinage.
     private function affiche_source($titre, $arbre_syntaxique)
     {
         echo "\n\n---- Source: $titre ----\n";

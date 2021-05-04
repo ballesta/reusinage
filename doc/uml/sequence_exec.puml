@@ -5,10 +5,31 @@ autonumber
 participant "reusinage noms \nidentificateurs" as RN
 participant "Réusinage" as R
 participant "Analyseur Syntaxique" as AS
+participant "Réusine Arbre Syntaxique" as RAS
+participant "Accompagnateur"    as Ac
+participant "Visiteur"    as V
 
+RN -> V **: Crée
 RN -> R **: Crée
-RN -> R : Programme, Action
-R -> AS **: Source programme
+activate R
+RN -> R : Programme, Visiteur
+R -> AS **: Crée
+activate AS
+R -> AS : Source programme
+R -> AS : Source programme
 R <-- AS : Arbre Syntaxique
+deactivate AS
+R -> RAS **: Crée
+activate RAS
+R -> RAS : Arbre Syntaxique, Visiteur
+
+RAS -> Ac **: Crée
+activate Ac
+RAS-> Ac : Arbre Syntaxique, Visiteur
+
+RAS-> Ac : Ajoute Visiteur
+RAS-> Ac : Visite arbre "Analyseur Syntaxique"
+activate V
+Ac -> V : noeud
 
 @enduml

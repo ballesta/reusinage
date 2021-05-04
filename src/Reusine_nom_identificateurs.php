@@ -3,8 +3,6 @@ use PhpParser\Node;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
 
-
-
 // Exemple de réusinage à reprendre pour tout nouvel usinage.
 // Seule partie à écrire, le reste est factorisé et donc commun à tout les usinages.
 
