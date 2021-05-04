@@ -3,12 +3,14 @@
 
 autonumber
 participant "reusinage noms \nidentificateurs" as RN
+
 participant "Réusinage" as R
+participant "Génération Source" as GS
 participant "Analyseur Syntaxique" as AS
 participant "Réusine Arbre Syntaxique" as RAS
 participant "Accompagnateur"    as Ac
 participant "Visiteur"    as V
-
+participant "Snake\nto\ncamelCase"    as STCC
 RN -> V **: Crée
 RN -> R **: Crée
 activate R
@@ -29,7 +31,22 @@ RAS-> Ac : Arbre Syntaxique, Visiteur
 
 RAS-> Ac : Ajoute Visiteur
 RAS-> Ac : Visite arbre "Analyseur Syntaxique"
+
 activate V
+loop
 Ac -> V : noeud
+
+activate STCC
+V -> STCC : nom variable
+V <-- STCC : nom variable modifié
+Ac <-- V : noeud modifié
+deactivate STCC
+end
+deactivate V
+
+RAS <-- Ac : Arbre Syntaxique modifié
+deactivate Ac
+R <-- RAS : Arbre Syntaxique modifié
+R -> GS ** : Arbre Syntaxique modifié
 
 @enduml
